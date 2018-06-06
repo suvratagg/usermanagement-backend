@@ -12,10 +12,10 @@ import com.example.demo.model.UserLogin;
 @Repository
 public interface UserLoginRepository extends JpaRepository<UserLogin, Long> {
 
-	@Query("SELECT new com.example.demo.model.UserLogin(u.username, u.password, u.firstName, u.lastName, u.userType) FROM com.example.demo.model.UserLogin u where u.username = ?1")
+	@Query("FROM com.example.demo.model.UserLogin u where u.username = ?1")
 	UserLogin findUsername(String username);
 
-	@Query("select new com.example.demo.model.UserLogin(u.username, u.password, u.firstName, u.lastName, u.userType) FROM com.example.demo.model.UserLogin u where u.password = ?1")
+	@Query("FROM com.example.demo.model.UserLogin u where u.password = ?1")
 	UserLogin findPassword(String password);
 
 	@Transactional

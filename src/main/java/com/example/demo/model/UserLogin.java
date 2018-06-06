@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "login", schema = "userSchema")
+@Table(name = "login")
 public class UserLogin implements Serializable {
 
 	/**

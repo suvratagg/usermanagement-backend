@@ -11,6 +11,6 @@ import com.example.demo.model.User;
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
 	
-	@Query("SELECT new com.example.demo.model.User(u.userId, u.firstName, u.lastName, u.username, u.address, u.age, u.userType, u.employeeCode, u.employeeStatus, u.employeeReport) FROM com.example.demo.model.User u where u.username like ?1%")
+	@Query("FROM com.example.demo.model.User u where u.username like ?1%")
 	List<User> findUser(String username);
 }

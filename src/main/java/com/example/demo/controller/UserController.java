@@ -18,17 +18,17 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.model.User;
 import com.example.demo.model.UserLogin;
-import com.example.demo.service.UserLoginServiceImpl;
-import com.example.demo.service.UserServiceImpl;
+import com.example.demo.service.UserLoginService;
+import com.example.demo.service.UserService;
 
 @RestController
 public class UserController {
 
 	@Autowired
-	private UserServiceImpl userServiceImpl;
+	private UserService userServiceImpl;
 
 	@Autowired
-	private UserLoginServiceImpl userLoginServiceImpl;
+	private UserLoginService userLoginServiceImpl;
 
 	@RequestMapping(value = "/findAll", produces = MediaType.APPLICATION_JSON_UTF8_VALUE, method = RequestMethod.GET)
 	public List<User> findAll() {

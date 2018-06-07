@@ -7,7 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-@Entity
+@Entity(name = "login")
 @Table(name = "login")
 public class UserLogin implements Serializable {
 

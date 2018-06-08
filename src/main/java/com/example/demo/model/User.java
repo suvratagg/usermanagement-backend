@@ -83,6 +83,9 @@ public class User implements Serializable {
 	 */
 	@Column(name = "employee_report")
 	private String employeeReport;
+	
+	@Column(name = "email")
+	private String email;
 
 	/**
 	 * Constructor without fields
@@ -105,7 +108,7 @@ public class User implements Serializable {
 	 * @param employeeReport
 	 */
 	public User(Long userId, String firstName, String lastName, String username, String address, int age,
-			String userType, String employeeCode, String employeeStatus, String employeeReport) {
+			String userType, String employeeCode, String employeeStatus, String employeeReport, String email) {
 		super();
 		this.userId = userId;
 		this.firstName = firstName;
@@ -117,6 +120,7 @@ public class User implements Serializable {
 		this.employeeCode = employeeCode;
 		this.employeeStatus = employeeStatus;
 		this.employeeReport = employeeReport;
+		this.email = email;
 	}
 
 	/**
@@ -257,6 +261,20 @@ public class User implements Serializable {
 	 */
 	public void setEmployeeReport(String employeeReport) {
 		this.employeeReport = employeeReport;
+	}
+	
+	/**
+	 * @return
+	 */
+	public String getEmail() {
+		return email;
+	}
+
+	/**
+	 * @param userType
+	 */
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public static long getSerialversionuid() {

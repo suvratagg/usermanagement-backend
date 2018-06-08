@@ -50,6 +50,9 @@ public class UserLogin implements Serializable {
 	 */
 	@Column(name = "usertype")
 	private String userType;
+	
+	@Column(name = "email")
+	private String email;
 
 	/**
 	 * Constructor without fields
@@ -66,13 +69,14 @@ public class UserLogin implements Serializable {
 	 * @param lastName
 	 * @param userType
 	 */
-	public UserLogin(String username, String password, String firstName, String lastName, String userType) {
+	public UserLogin(String username, String password, String firstName, String lastName, String userType,String email) {
 		super();
 		this.username = username;
 		this.password = password;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.userType = userType;
+		this.email = email;
 	}
 
 	/**
@@ -143,5 +147,19 @@ public class UserLogin implements Serializable {
 	 */
 	public void setUserType(String userType) {
 		this.userType = userType;
+	}
+	
+	/**
+	 * @return
+	 */
+	public String getEmail() {
+		return email;
+	}
+
+	/**
+	 * @param userType
+	 */
+	public void setEmail(String email) {
+		this.email = email;
 	}
 }

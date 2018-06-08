@@ -3,12 +3,15 @@ package com.example.demo.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.http.MediaType;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -33,6 +36,9 @@ public class UserController {
 
 	@Autowired
 	private UserLoginService userLoginServiceImpl;
+
+	@Autowired
+	public JavaMailSender emailSender;
 
 	/**
 	 * @return
@@ -70,6 +76,7 @@ public class UserController {
 		userLogin.setUsername(user.getUsername());
 		userLogin.setUserType(user.getUserType());
 		userLogin.setPassword(user.getUsername());
+		userLogin.setEmail(user.getEmail());
 		userLoginServiceImpl.add(userLogin);
 		return true;
 	}
@@ -112,11 +119,18 @@ public class UserController {
 	/**
 	 * @param userRegister
 	 * @return
+	 * @throws MessagingException
 	 */
 	@CrossOrigin(origins = "*")
 	@RequestMapping(value = "/registerUser", consumes = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST)
 	public boolean registerUser(@RequestBody UserLogin userRegister) {
 		userLoginServiceImpl.registerUser(userRegister);
+		SimpleMailMessage message = new SimpleMailMessage();
+		message.setTo(userRegister.getEmail());
+		message.setSubject("Welcome To Our User Management Application");
+		message.setText(
+				"Welcome dear user to our application. Thank you for registering with us. Please login and enjoy working on the application :)");
+		emailSender.send(message);
 		return true;
 	}
 
@@ -162,7 +176,7 @@ public class UserController {
 		userLoginServiceImpl.deleteUser(username);
 		return 1;
 	}
-	
+
 	/**
 	 * @param userId
 	 * @param updateUserDetails

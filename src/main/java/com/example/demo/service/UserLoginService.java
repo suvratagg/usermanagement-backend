@@ -1,5 +1,7 @@
 package com.example.demo.service;
 
+import javax.mail.MessagingException;
+
 import com.example.demo.model.UserLogin;
 
 /**
@@ -11,6 +13,7 @@ public interface UserLoginService {
 	/**
 	 * @param userLogin
 	 * @return
+	 * @throws MessagingException 
 	 */
 	public boolean registerUser(UserLogin userLogin);
 	

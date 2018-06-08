@@ -21,6 +21,10 @@ import com.example.demo.model.UserLogin;
 import com.example.demo.service.UserLoginService;
 import com.example.demo.service.UserService;
 
+/**
+ * @author suvrat.aggarwal
+ *
+ */
 @RestController
 public class UserController {
 
@@ -30,6 +34,9 @@ public class UserController {
 	@Autowired
 	private UserLoginService userLoginServiceImpl;
 
+	/**
+	 * @return
+	 */
 	@RequestMapping(value = "/findAll", produces = MediaType.APPLICATION_JSON_UTF8_VALUE, method = RequestMethod.GET)
 	public List<User> findAll() {
 		List<User> user = new ArrayList<>();
@@ -37,12 +44,22 @@ public class UserController {
 		return user;
 	}
 
+	/**
+	 * @param username
+	 * @param session
+	 * @param request
+	 * @return
+	 */
 	@CrossOrigin(origins = "*")
 	@RequestMapping(value = "/find", produces = MediaType.APPLICATION_JSON_UTF8_VALUE, method = RequestMethod.GET)
 	public List<User> find(@Param("username") String username, HttpSession session, HttpServletRequest request) {
 		return userServiceImpl.find(username);
 	}
 
+	/**
+	 * @param user
+	 * @return
+	 */
 	@CrossOrigin(origins = "*")
 	@RequestMapping(value = "/save", consumes = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST)
 	public boolean add(@RequestBody User user) {
@@ -57,6 +74,10 @@ public class UserController {
 		return true;
 	}
 
+	/**
+	 * @param userId
+	 * @return
+	 */
 	@CrossOrigin(origins = "*")
 	@RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
 	public boolean delete(@PathVariable(value = "id") Long userId) {
@@ -64,13 +85,23 @@ public class UserController {
 		return true;
 	}
 
+	/**
+	 * @param userId
+	 * @param updateUserDetails
+	 * @return
+	 */
 	@CrossOrigin(origins = "*")
 	@RequestMapping(value = "/updateUser/{id}", method = RequestMethod.PUT)
 	public User updateUser(@PathVariable(value = "id") Long userId, @RequestBody User updateUserDetails) {
 		User updatedUser = userServiceImpl.updateUser(userId, updateUserDetails);
 		return updatedUser;
 	}
-	
+
+	/**
+	 * @param userId
+	 * @param updateUserDetails
+	 * @return
+	 */
 	@CrossOrigin(origins = "*")
 	@RequestMapping(value = "/updateAdmin/{id}", method = RequestMethod.PUT)
 	public User updateAdmin(@PathVariable(value = "id") Long userId, @RequestBody User updateUserDetails) {
@@ -78,38 +109,57 @@ public class UserController {
 		return updatedUser;
 	}
 
+	/**
+	 * @param userRegister
+	 * @return
+	 */
 	@CrossOrigin(origins = "*")
 	@RequestMapping(value = "/registerUser", consumes = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST)
 	public boolean registerUser(@RequestBody UserLogin userRegister) {
 		userLoginServiceImpl.registerUser(userRegister);
 		return true;
 	}
-	
+
+	/**
+	 * @param username
+	 * @return
+	 */
 	@CrossOrigin(origins = "*")
 	@RequestMapping(value = "/findUsername", produces = MediaType.APPLICATION_JSON_UTF8_VALUE, method = RequestMethod.GET)
 	public UserLogin findUsername(@Param("username") String username) {
 		return userLoginServiceImpl.findUsername(username);
 	}
-	
+
+	/**
+	 * @param password
+	 * @return
+	 */
 	@CrossOrigin(origins = "*")
 	@RequestMapping(value = "/checkPassword", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, method = RequestMethod.POST)
 	public UserLogin findPassword(@RequestBody String password) {
 		return userLoginServiceImpl.checkPassword(password);
 	}
-	
-	
+
+	/**
+	 * @param request
+	 * @param session
+	 * @return
+	 */
 	@CrossOrigin
-	@RequestMapping(value = "/logout",produces = MediaType.APPLICATION_JSON_UTF8_VALUE, method = RequestMethod.GET)
-	public String logout (HttpServletRequest request, HttpSession session) {
+	@RequestMapping(value = "/logout", produces = MediaType.APPLICATION_JSON_UTF8_VALUE, method = RequestMethod.GET)
+	public String logout(HttpServletRequest request, HttpSession session) {
 		session.invalidate();
 		return "Logout";
 	}
-	
+
+	/**
+	 * @param username
+	 * @return
+	 */
 	@CrossOrigin(origins = "*")
 	@RequestMapping(value = "/deleteLoginUser/{username}", method = RequestMethod.DELETE)
 	public int deleteUser(@PathVariable(value = "username") String username) {
 		userLoginServiceImpl.deleteUser(username);
 		return 1;
 	}
-	
 }

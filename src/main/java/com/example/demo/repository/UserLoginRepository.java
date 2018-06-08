@@ -9,15 +9,31 @@ import org.springframework.stereotype.Repository;
 
 import com.example.demo.model.UserLogin;
 
+/**
+ * @author suvrat.aggarwal
+ *
+ */
 @Repository
 public interface UserLoginRepository extends JpaRepository<UserLogin, Long> {
 
+	/**
+	 * @param username
+	 * @return
+	 */
 	@Query("FROM login u where u.username = ?1")
 	UserLogin findUsername(String username);
 
+	/**
+	 * @param password
+	 * @return
+	 */
 	@Query("FROM login u where u.password = ?1")
 	UserLogin findPassword(String password);
 
+	/**
+	 * @param username
+	 * @return
+	 */
 	@Transactional
 	@Modifying
 	@Query("Delete FROM login u where u.username = ?1")

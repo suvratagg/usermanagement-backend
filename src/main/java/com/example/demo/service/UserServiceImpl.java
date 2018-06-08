@@ -10,12 +10,21 @@ import org.springframework.stereotype.Service;
 import com.example.demo.model.User;
 import com.example.demo.repository.UserRepository;
 
+/**
+ * @author suvrat.aggarwal
+ *
+ */
 @Service
 public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private UserRepository userRepository;
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.example.demo.service.UserService#findAll()
+	 */
 	@Override
 	public List<User> findAll() {
 		List<User> user = new ArrayList<>();
@@ -23,23 +32,44 @@ public class UserServiceImpl implements UserService {
 		return user;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.example.demo.service.UserService#find(java.lang.String)
+	 */
 	@Override
 	public List<User> find(String username) {
 		return userRepository.findUser(username);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.example.demo.service.UserService#add(com.example.demo.model.User)
+	 */
 	@Override
 	public boolean add(User user) {
 		userRepository.save(user);
 		return true;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.example.demo.service.UserService#delete(java.lang.Long)
+	 */
 	@Override
 	public boolean delete(Long userId) {
 		userRepository.deleteById(userId);
 		return true;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.example.demo.service.UserService#updateUser(java.lang.Long,
+	 * com.example.demo.model.User)
+	 */
 	@Override
 	public User updateUser(Long userId, User updateUserDetails) {
 		Optional<User> user = userRepository.findById(userId);
@@ -52,6 +82,12 @@ public class UserServiceImpl implements UserService {
 		return updatedUser;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.example.demo.service.UserService#updateAdmin(java.lang.Long,
+	 * com.example.demo.model.User)
+	 */
 	@Override
 	public User updateAdmin(Long userId, User updateUserDetails) {
 		Optional<User> user = userRepository.findById(userId);
@@ -61,5 +97,4 @@ public class UserServiceImpl implements UserService {
 		User updatedUser = userRepository.save(user.get());
 		return updatedUser;
 	}
-
 }

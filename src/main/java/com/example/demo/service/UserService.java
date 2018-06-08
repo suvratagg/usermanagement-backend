@@ -45,4 +45,11 @@ public interface UserService {
 	 * @return
 	 */
 	public User updateAdmin(Long userId, User updateUserDetails);
+	
+	/**
+	 * @param userId
+	 * @param updateUserDetails
+	 * @return
+	 */
+	public User update(Long userId, User updateUserDetails);
 }

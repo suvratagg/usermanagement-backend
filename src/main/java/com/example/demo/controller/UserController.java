@@ -162,4 +162,16 @@ public class UserController {
 		userLoginServiceImpl.deleteUser(username);
 		return 1;
 	}
+	
+	/**
+	 * @param userId
+	 * @param updateUserDetails
+	 * @return
+	 */
+	@CrossOrigin(origins = "*")
+	@RequestMapping(value = "/update/{id}", method = RequestMethod.PUT)
+	public User update(@PathVariable(value = "id") Long userId, @RequestBody User updateUserDetails) {
+		User updatedUser = userServiceImpl.update(userId, updateUserDetails);
+		return updatedUser;
+	}
 }

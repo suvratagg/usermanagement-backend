@@ -1,12 +1,8 @@
 package com.example.demo.service;
 
-import javax.mail.MessagingException;
-import javax.mail.internet.MimeMessage;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.model.UserLogin;
@@ -21,8 +17,9 @@ public class UserLoginServiceImpl implements UserLoginService {
 
 	@Autowired
 	private UserLoginRepository userLoginRepository;
-
 	
+	@Autowired
+	public JavaMailSender emailSender;
 
 	/*
 	 * (non-Javadoc)
@@ -34,7 +31,12 @@ public class UserLoginServiceImpl implements UserLoginService {
 	@Override
 	public boolean registerUser(UserLogin userLogin) {
 		userLoginRepository.save(userLogin);
-		
+		SimpleMailMessage message = new SimpleMailMessage();
+		message.setTo(userLogin.getEmail());
+		message.setSubject("Welcome To Our User Management Application");
+		message.setText(
+				"Welcome dear user to our application. Thank you for registering with us. Please login and enjoy working on the application :)");
+		emailSender.send(message);
 		return true;
 	}
 

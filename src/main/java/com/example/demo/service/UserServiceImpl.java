@@ -98,6 +98,9 @@ public class UserServiceImpl implements UserService {
 		return updatedUser;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.example.demo.service.UserService#update(java.lang.Long, com.example.demo.model.User)
+	 */
 	@Override
 	public User update(Long userId, User updateUserDetails) {
 		Optional<User> user = userRepository.findById(userId);

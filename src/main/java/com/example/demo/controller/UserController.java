@@ -35,8 +35,6 @@ public class UserController {
 	@Autowired
 	private UserLoginService userLoginServiceImpl;
 
-	
-
 	/**
 	 * @return
 	 */
@@ -121,8 +119,7 @@ public class UserController {
 	@CrossOrigin(origins = "*")
 	@RequestMapping(value = "/registerUser", consumes = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST)
 	public boolean registerUser(@RequestBody UserLogin userRegister) {
-		userLoginServiceImpl.registerUser(userRegister);
-		
+		userLoginServiceImpl.registerUser(userRegister);		
 		return true;
 	}
 

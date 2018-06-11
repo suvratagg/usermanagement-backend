@@ -84,6 +84,9 @@ public class User implements Serializable {
 	@Column(name = "employee_report")
 	private String employeeReport;
 	
+	/**
+	 * This field contains email id
+	 */
 	@Column(name = "email")
 	private String email;
 
@@ -106,6 +109,7 @@ public class User implements Serializable {
 	 * @param employeeCode
 	 * @param employeeStatus
 	 * @param employeeReport
+	 * @param email
 	 */
 	public User(Long userId, String firstName, String lastName, String username, String address, int age,
 			String userType, String employeeCode, String employeeStatus, String employeeReport, String email) {

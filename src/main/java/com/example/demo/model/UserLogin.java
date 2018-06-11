@@ -51,6 +51,9 @@ public class UserLogin implements Serializable {
 	@Column(name = "usertype")
 	private String userType;
 	
+	/**
+	 * This field contains email id
+	 */
 	@Column(name = "email")
 	private String email;
 
@@ -68,6 +71,7 @@ public class UserLogin implements Serializable {
 	 * @param firstName
 	 * @param lastName
 	 * @param userType
+	 * @param email
 	 */
 	public UserLogin(String username, String password, String firstName, String lastName, String userType,String email) {
 		super();
